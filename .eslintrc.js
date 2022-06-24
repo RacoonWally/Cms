@@ -41,6 +41,7 @@ module.exports = {
             beforeClosing: 'allow',
         }],
         'react/function-component-definition': ['error', { namedComponents: 'arrow-function' }],
+        'react/state-in-constructor': 'off',
         'import/extensions': [
             'error',
             'ignorePackages',
@@ -62,5 +63,8 @@ module.exports = {
             ImportDeclaration: 'never',
             ExportDeclaration: { multiline: true, minProperties: 3 },
         }],
+        'class-methods-use-this': 'off',
+        'no-unused-vars': 'off',
+        'react/destructuring-assignment': 'off',
     },
 };

@@ -1,6 +1,9 @@
 import { action, computed, makeObservable, observable } from 'mobx';
+import { UserService } from '../services/UserService/UserService';
 
 export class UserStore {
+
+    public id: string;
 
     public login: string;
 
@@ -20,10 +23,13 @@ export class UserStore {
         return `${this.firstName} ${this.lastName} ${this.surName}`;
     }
 
+    protected UserService = new UserService();
+
     public constructor() {
         makeObservable(
             this,
             {
+                id: observable,
                 login: observable,
                 password: observable,
                 firstName: observable,
@@ -31,33 +37,22 @@ export class UserStore {
                 surName: observable,
                 initials: computed,
                 fullName: computed,
-                setLogin: action.bound,
-                setFirstName: action.bound,
-                setLastName: action.bound,
-                setPassword: action.bound,
-                setSurName: action.bound,
+                getId: action.bound,
+                getUserInfo: action.bound,
             },
         );
     }
 
-    public setLogin(login: string) {
-        this.login = login;
+    public async getId(login: string, password: string) {
+        this.id = await this.UserService.auth({ login, password });
     }
 
-    public setPassword(password: string) {
-        this.password = password;
-    }
-
-    public setFirstName(firstName: string) {
-        this.firstName = firstName;
-    }
-
-    public setLastName(lastName: string) {
-        this.lastName = lastName;
-    }
-
-    public setSurName(surName: string) {
-        this.surName = surName;
+    public async getUserInfo() {
+        const user = await this.UserService.loadUserInfo(this.id);
+        this.login = user.login;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.surName = user.surName;
     }
 
 }

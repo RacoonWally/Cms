@@ -8,8 +8,8 @@ module.exports = {
     entry: ['./src/index.tsx'],
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/dist',
         filename: '[name].[hash].js',
+        assetModuleFilename: 'assets/[name].[hash].[ext]',
     },
     devtool: 'inline-source-map',
     plugins: [
@@ -26,10 +26,6 @@ module.exports = {
                     'css-loader',
                     'sass-loader',
                 ],
-            },
-            {
-                test: /\.(jpg|jpeg|png|svg)/,
-                use: ['file-loader'],
             },
             {
                 rules: [
@@ -68,7 +64,7 @@ module.exports = {
     },
     resolve: { extensions: ['.tsx', '.ts', '.js', '.json'] },
     devServer: {
-        port: 3100,
+        port: 3101,
         devMiddleware: { writeToDisk: true },
         static: { directory: path.join(__dirname, 'dist') },
         allowedHosts: 'all',

@@ -1,0 +1,19 @@
+.header {
+    width: 100%;
+    height: 30px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    &__container {
+        display: flex;
+        flex-direction: row;
+
+        align-items: center;
+    }
+
+    &__link {
+        margin-right: 5px;
+    }
+}
